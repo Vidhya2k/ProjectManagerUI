@@ -1,0 +1,70 @@
+﻿
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form>
+            <div class="form-group">
+                <label>First Name</label>
+                <input maxlength="50" type="text" ng-model="First_Name" class="form-control input-lg" placeholder="Enter First Name here">
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input maxlength="50" ng-model="Last_Name" class="form-control input-lg" placeholder="Enter Last Name here">
+            </div>
+            <div class="form-group">
+                <label>Employee Id</label>
+                <input  type="number" ng-model="Employee_ID" class="form-control input-lg" placeholder="Enter Employee Id here">
+            </div>
+            <div>
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 60%; "></td>
+                        <td style="width: 20%;">
+                            <button id="addButton" ng-click="addUser()" class="btn btn-info form-control">Add</button>
+                            <button id="editButton" ng-click="updateUser()" class="btn btn-info form-control">Update</button>
+                        </td>
+                        <td style="width: 20%;">
+                            <button ng-click="resetUser()" class="btn btn-info form-control">Reset</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <hr/>
+            <div class="form-group">
+                <table style="width: 100%; margin: 0 0 0 0">
+                    <tr>
+                        <td style="width: 50%">
+                            <input type="text"  ng-model="textFilter.First_Name" class="form-control input-lg" placeholder="Search...">
+                        </td>
+                        <td>
+                            <label for="inputParentTask">Sort:</label>
+                            <button ng-click="sortBy('First_Name')" class="btn btn-info">First Name</button>
+                            <button ng-click="sortBy('Last_Name')" class="btn btn-info">Last Name</button>
+                            <button ng-click="sortBy('Employee_ID')" class="btn btn-info">Id</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div  class="form-group">
+                <table class="table table-striped table-bordered">  
+                    <tr ng-repeat="user in users | filter:textFilter | orderBy:propertyName:reverse">
+                        <td style="width: 80%">
+                            <ul class="list-group">
+                                <li class="list-group-item"> {{user.Employee_Id}}</li>
+                                <li class="list-group-item"> {{user.First_Name}}</li>
+                                <li class="list-group-item"> {{user.Last_Name}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <button ng-click="editUser(user)" class="btn">Edit</button>
+                                <br />
+                                <br />
+                                <button ng-click="deleteUser(user)" class="btn">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>

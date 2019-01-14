@@ -1,0 +1,151 @@
+﻿
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form>
+            <div class="form-group">
+                <label for="inputDescription">Project</label>
+                <input type="text" ng-model="Project_Description" maxlength="50" class="form-control input-lg" placeholder="Enter Project Name here">
+            </div>
+            <div class="form-group">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 40%">
+                            <input type="checkbox" id="checkBoxEnableDate" ng-click="enableDates()"> Set Start and End Date<br>
+                        </td>
+                        <td style="width: 30%">
+                            <input type="Date" id="startDate" ng-model="Start_Date" class="form-control input-lg" placeholder="Start Date">
+                        </td>
+                        <td>
+                            <input type="Date" id="endDate" ng-model="End_Date" class="form-control input-lg" placeholder="End Date">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="form-group">
+                <label for="inputPriority">Priority</label>
+                <input type="range" min="0" max="30" id="inputPriority" ng-model="Priority" class="form-control input-lg" placeholder="Priority">
+            </div>
+            <div class="form-group">
+                <label for="inputParentTask">Manager</label>
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 85%">
+                            <input type="text" ng-model="User_Name" disabled="disabled" class="form-control input-lg" placeholder="Search...">
+                        </td>
+                        <td style="text-align: right">
+                            <button class="btn btn-info" data-toggle="modal" data-target="#availableUsersModel">Search</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 60%"></td>
+                        <td style="width: 20%">
+                            <button id="addButton" ng-click="addProject()" class="btn btn-info form-control">Add</button>
+                            <button id="editButton" ng-click="updateProject()" class="btn btn-info form-control">Update</button>
+                        </td>
+                        <td>
+                            <button ng-click="resetProject()" class="btn btn-info form-control">Reset</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <hr />
+            <div class="form-group">
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <input type="text" ng-model="textFilter" class="form-control input-lg" placeholder="Search...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height: 10px" />
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="inputParentTask">Sort By: </label>
+                            <button ng-click="sortBy('Start_Date')" class="btn btn-info">Start Date</button>
+                            <button ng-click="sortBy('End_Date')" class="btn btn-info">End Date</button>
+                            <button ng-click="sortBy('Priority')" class="btn btn-info">Priority</button>
+                            <button ng-click="sortBy('Completed')" class="btn btn-info">Completed</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="form-group">
+                <table class="table table-striped table-bordered">
+                    <tr ng-repeat="project in projects | filter:textFilter | orderBy:propertyName:reverse">
+                        <td style="width: 80%">
+                            <ul class="list-group">
+                                <li class="list-group-item"> Project : {{project.Project_Description}}</li>
+                                <li class="list-group-item"> Start Date: {{project.Start_Date | date:'MM/dd/yyyy'}}</li>
+                                <li class="list-group-item"> End Date: {{project.End_Date | date:'MM/dd/yyyy'}}</li>
+                                <li class="list-group-item"> Priority: {{project.Priority}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <button ng-click="editProject(project)" class="btn">Edit</button>
+                                <br />
+                                <br />
+                                <button class="btn">Suspend</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="availableUsersModel" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Available Users</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>User</label>
+                    <input type="text" ng-model="filterUser" class="form-control input-lg" placeholder="Type here to filter ...">
+                </div>
+
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Employee Id</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="user in users | filter:filterUser">
+                        <td>
+                            {{user.Employee_Id}}
+                        </td>
+                        <td>
+                            {{user.First_Name}}
+                        </td>
+                        <td>
+                            {{user.Last_Name}}
+                        </td>
+                        <td>
+                            <a ng-click="populateSelectedUser(user)" data-dismiss="modal">Select</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

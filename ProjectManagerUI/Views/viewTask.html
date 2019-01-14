@@ -1,0 +1,113 @@
+﻿<div class="form-group">
+    <table style="width: 100%; margin: 0 0 0 0">
+        <tr>
+            <td style="width: 5%">  <label>Project</label></td>
+            <td style="width: 45%">
+                <input type="text" ng-model="Project_Search_Text" disabled="disabled" class="form-control input-lg" id="searchProject">
+            </td>
+            <td>
+                <button ng-click="searchTaskByProject()" class="btn btn-info" data-toggle="modal" data-target="#availableProjectsModel">Search</button>
+                <label>Sort Task By: </label>
+                <button ng-click="sortBy('Start_Date')" class="btn btn-info">Start Date</button>
+                <button ng-click="sortBy('End_Date')" class="btn btn-info">End Date</button>
+                <button ng-click="sortBy('Priority')" class="btn btn-info">Priority</button>
+                <button ng-click="sortBy('Status')" class="btn btn-info">Completed</button>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <hr />
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Task</th>
+            <th>Parent</th>
+            <th>Priority</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead> 
+        <tr ng-repeat="task in tasks | filter: {Project: { Project_Description: Project_Search_Text }} | orderBy:propertyName:reverse">
+            <td>
+                {{task.Task_Description}}
+            </td>
+            <td>
+                {{task.Parent_ID}}
+            </td>
+            <td>
+                {{task.Priority}}
+            </td>
+            <td>
+                {{task.Start_Date | date:'MM/dd/yyyy'}}
+            </td>
+            <td>
+                {{task.End_Date | date:'MM/dd/yyyy'}}
+            </td>
+            <td>
+                {{task.Status}}
+            </td>
+            <th>
+                <a href="#!/AddTask/{{task.Task_Id}}">Edit</a>
+            </th>
+            <th>
+                <a href="#" ng-click="endTask(task)">End Task</a>
+            </th>
+        </tr>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="availableProjectsModel" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Available Projects</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Project</label>
+                    <input type="text" ng-model="filterProject" class="form-control input-lg" placeholder="Type here to filter ...">
+                </div>
+
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Priority</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="project in projects | filter: filterProject | orderBy:propertyName">
+                        <td>
+                            {{project.Project_Description}}
+                        </td>
+                        <td>
+                            {{project.Priority}}
+                        </td>
+                        <td>
+                            {{project.Start_Date | date:'MM/dd/yyyy'}}
+                        </td>
+                        <td>
+                            {{project.End_Date | date:'MM/dd/yyyy'}}
+                        </td>
+                        <td>
+                            <a ng-click="searchTasksBy(project)" data-dismiss="modal">Select</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
