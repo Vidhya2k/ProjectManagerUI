@@ -4,7 +4,7 @@ var ProjectManagerService = angular.module('ProjectManagerService', []);
 
 ProjectManagerService.factory('ProjectManagerApi', function ($http) {
 
-    var urlBase = "http://localhost:55318/api";
+    var urlBase = "http://localhost/ProjectManagerService/api";
     var projectManagerApi = {};
 
     projectManagerApi.getProjects = function () {

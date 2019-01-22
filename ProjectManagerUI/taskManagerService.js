@@ -4,7 +4,7 @@ var TaskManagerService = angular.module('TaskManagerService', []);
 
 TaskManagerService.factory('TaskApi', function ($http) {
 
-    var urlBase = "http://localhost:55318/api";
+    var urlBase = "http://localhost/ProjectManagerService/api";
     var TaskApi = {};
 
     TaskApi.getTasks = function () {

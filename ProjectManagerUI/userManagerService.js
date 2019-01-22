@@ -4,7 +4,7 @@ var UserManagerService = angular.module('UserManagerService', []);
 
 UserManagerService.factory('UserManagerApi', function ($http) {
 
-    var urlBase = "http://localhost:55318/api";
+    var urlBase = "http://localhost/ProjectManagerService/api";
     var UserManagerApi = {};
 
     UserManagerApi.getUsers = function () {
