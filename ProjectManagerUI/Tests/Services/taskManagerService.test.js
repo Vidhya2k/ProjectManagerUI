@@ -6,56 +6,67 @@
 /// <reference path="../../scripts/angular-route.min.js" />
 /// <reference path="../../scripts/jquery-1.9.0.js" />
 /// <reference path="../../scripts/bootstrap.js" />
-/// <reference path="../../ProjectManagement.js" />
+/// <reference path="../../taskManagerService.js" />
 
-describe('ProjectManagerApplication',
+
+//'use strict';
+//1.
+describe('Testing a TaskManagerService',
     function() {
+        var taskApi;
+        var httpBackend;
 
-        var scope, controller;
-        beforeEach(module('ProjectManagerApplication'));
-
+        //2.
         beforeEach(function() {
-            angular.module('ngRoute', []);
-            angular.module('TaskManagerService', []);
-            angular.module('ProjectManagerService', []);
-            angular.module('UserManagerService', []);
+            //3. load the module.
+
+            module('TaskManagerService');
+            // 4. get your service, also get $httpBackend
+            // $httpBackend will be a mock.
+            inject(function(TaskApi, _$httpBackend_) {
+                taskApi = TaskApi;
+                httpBackend = _$httpBackend_;
+                httpBackend.verifyNoOutstandingRequest();
+            });
         });
 
-        describe('ViewTaskController',
-            function () {
-                angular.module('ngRoute', []);
-                angular.module('TaskManagerService', []);
-                angular.module('ProjectManagerService', []);
-                angular.module('UserManagerService', []);
+        // 5. make sure no expectations were missed in your tests.
+        afterEach(function() {
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingExpectation();
+            httpBackend.verifyNoOutstandingRequest();
+        });
 
-                beforeEach(inject(function($rootScope, TaskApi, ProjectManagerApi, $controller) {
-                    scope = $rootScope.$new();
-                    controller = $controller('ViewTaskController', { $scope: scope });
-                }));
+        it('This is a simple test',
+            function() {
+                expect(2 + 2).toEqual(4);
             });
 
-
-        it("Check My Name",
+        // A simple test to verify the Users service exists
+        it('should service exist',
             function() {
-                var result = scope.myName;
-                expect(result).toEqual('Krishnan');
-            });
-
-        it("Check 42342",
-            function() {
-                var result = 1;
-                expect(result).toEqual(1);
+                expect(taskApi).toBeDefined();
             });
     });
 
-    //describe('ViewTaskController', function ($scope, TaskApi, ProjectManagerApi) {
 
-    //    beforeEach(inject(function($rootScope, $controller) {
-    //        scope = $rootScope.$new();
-    //        controller = $controller('ViewTaskController', { $scope: scope });
-    //    }));
-    //  it('Check Name',
-    //            function() {
-    //                expect(scope.start).toEqual('Krishnan');
-    //            });
-    //    });
+// KICK OFF JASMINE
+var jasmineEnv = jasmine.getEnv();
+var trivialReporter = new jasmine.TrivialReporter();
+
+jasmineEnv.addReporter(trivialReporter);
+
+jasmineEnv.specFilter = function (spec) {
+    return trivialReporter.specFilter(spec);
+};
+
+jasmineEnv.execute();
+
+
+
+
+
+
+
+
+

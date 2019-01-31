@@ -74,8 +74,10 @@
     <Content Include="Content\jasmine\jasmine.css" />
     <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Gruntfile.js" />
     <Content Include="index.html" />
     <Content Include="calc.js" />
+    <Content Include="karma.conf.js" />
     <Content Include="ProjectManagement.js" />
     <Content Include="projectManagerService.js" />
     <Content Include="Scripts\angular-animate.js" />
@@ -847,6 +849,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="package.json" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\jasmine\boot.js" />
     <Content Include="Scripts\jasmine\console.js" />
@@ -857,8 +860,10 @@
     <Content Include="Scripts\sitemap.xml" />
     <Content Include="taskManagerService.js" />
     <Content Include="Tests\math_test.js" />
-    <Content Include="Tests\Services\projectManagerService.test.js" />
-    <Content Include="Tests\Services\userManagerService.test.js" />
+    <Content Include="Tests\Controllers\projectManagerService.test.js" />
+    <Content Include="Tests\Controllers\test.js" />
+    <Content Include="Tests\Controllers\userManagerService.test.js" />
+    <Content Include="Tests\Services\taskManagerService.test.js" />
     <Content Include="userManagerService.js" />
     <Content Include="Views\addProject.html" />
     <Content Include="Views\addTask.html" />
@@ -888,7 +893,7 @@
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\jquery-1.9.0.min.map" />
-    <Content Include="Tests\Services\taskManagerService.test.js" />
+    <Content Include="Tests\Controllers\taskManagerService.test.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -926,7 +931,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\KarmaGruntJSUnit.MSBuild.1.0.7\build\KarmaGruntJSUnit.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\KarmaGruntJSUnit.MSBuild.1.0.7\build\KarmaGruntJSUnit.MSBuild.Targets'))" />
   </Target>
+  <Import Project="..\packages\KarmaGruntJSUnit.MSBuild.1.0.7\build\KarmaGruntJSUnit.MSBuild.Targets" Condition="Exists('..\packages\KarmaGruntJSUnit.MSBuild.1.0.7\build\KarmaGruntJSUnit.MSBuild.Targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
